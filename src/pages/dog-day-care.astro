@@ -1,8 +1,18 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
 const breadcrumbs = [
   { name: 'Home', href: '/' },
   { name: 'Daycare', href: '/dog-day-care' },
+];
+const daycareFields = [
+  { name: 'name', label: 'Your name', required: true, half: true },
+  { name: 'email', label: 'Email', type: 'email' as const, required: true, half: true },
+  { name: 'phone', label: 'Phone', type: 'tel' as const, half: true },
+  { name: 'dog_count', label: 'Number of dogs', half: true },
+  { name: 'dog_names', label: 'Dog name(s) + breed(s)' },
+  { name: 'preferred_days', label: 'Preferred days', placeholder: 'e.g. Mon/Wed/Fri this month' },
+  { name: 'message', label: 'Anything we should know?', type: 'textarea' as const, rows: 4 },
 ];
 ---
 <BaseLayout
@@ -49,8 +59,17 @@ const breadcrumbs = [
         <li><span>Nail Trim (per dog)</span><strong>$15</strong></li>
       </ul>
 
+      <h2>Daycare Request Form</h2>
+      <ContactForm
+        formId="daycare-request"
+        formLabel="Daycare Request"
+        introText="Please enter all fields requested below. We will be in touch within 24 hours to confirm your reservation."
+        fields={daycareFields}
+        submitLabel="Send request"
+      />
+
       <p style="text-align: center; margin-top: 36px;">
-        <a href={`tel:7707332621`} class="btn">Call to Reserve · 770-733-2621</a>
+        Prefer to call? <a href={`tel:7707332621`} style="border-bottom: 2px solid var(--accent);">770-733-2621</a>
       </p>
     </div>
   </section>

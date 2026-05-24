@@ -1,0 +1,117 @@
+---
+interface Field {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  required?: boolean;
+  placeholder?: string;
+  options?: string[]; // for select
+  rows?: number;       // for textarea
+  half?: boolean;      // span half-column on desktop
+}
+
+interface Props {
+  formId: string;          // e.g. "daycare-request"
+  formLabel: string;       // e.g. "Daycare Request"
+  introText?: string;
+  fields: Field[];
+  submitLabel?: string;
+}
+
+const { formId, formLabel, introText, fields, submitLabel = 'Send request' } = Astro.props;
+---
+<form class="contact-form" data-form-id={formId} aria-label={formLabel} novalidate>
+  {introText && <p class="form-intro">{introText}</p>}
+
+  <div class="form-grid">
+    {fields.map((f) => (
+      <label class={`field${f.half ? ' field-half' : ''}`}>
+        <span class="field-label">{f.label}{f.required && <span aria-hidden="true" class="req"> *</span>}</span>
+        {f.type === 'textarea' ? (
+          <textarea name={f.name} rows={f.rows || 5} placeholder={f.placeholder} required={f.required ?? false}></textarea>
+        ) : f.type === 'select' ? (
+          <select name={f.name} required={f.required ?? false}>
+            <option value="">Select…</option>
+            {(f.options || []).map((o) => <option value={o}>{o}</option>)}
+          </select>
+        ) : (
+          <input type={f.type || 'text'} name={f.name} placeholder={f.placeholder} required={f.required ?? false} autocomplete={
+            f.name === 'email' ? 'email'
+            : f.name === 'phone' ? 'tel'
+            : f.name === 'name' ? 'name'
+            : 'off'
+          } />
+        )}
+      </label>
+    ))}
+  </div>
+
+  {/* Honeypot — humans can't see this; bots fill it; server rejects when non-empty */}
+  <div class="hp" aria-hidden="true">
+    <label>Website (leave blank)<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  {/* Hidden discriminator + a render-time timestamp (used as a min-fill-time check) */}
+  <input type="hidden" name="form_id" value={formId} />
+  <input type="hidden" name="form_label" value={formLabel} />
+  <input type="hidden" name="ts" value="" data-ts />
+
+  {/* Turnstile mount — only renders if window.TURNSTILE_SITE_KEY is set at runtime */}
+  <div class="turnstile-mount" data-turnstile></div>
+
+  <button type="submit" class="btn form-submit">{submitLabel}</button>
+
+  <div class="form-status" data-status hidden></div>
+</form>
+
+<script define:vars={{ formId }}>
+  document.querySelectorAll(`form[data-form-id="${formId}"]`).forEach((form) => {
+    const tsInput = form.querySelector('[data-ts]');
+    if (tsInput) tsInput.value = String(Date.now());
+
+    // Optional Turnstile bootstrap — only fires if window.TURNSTILE_SITE_KEY is provided.
+    const tsMount = form.querySelector('[data-turnstile]');
+    const tsKey = window.TURNSTILE_SITE_KEY;
+    if (tsMount && tsKey && !document.querySelector('script[data-ts-loader]')) {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      s.async = true; s.defer = true;
+      s.setAttribute('data-ts-loader', '1');
+      document.head.appendChild(s);
+    }
+    if (tsMount && tsKey) {
+      tsMount.classList.add('cf-turnstile');
+      tsMount.setAttribute('data-sitekey', tsKey);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('[data-status]');
+      const submit = form.querySelector('.form-submit');
+      submit.disabled = true; submit.textContent = 'Sending…';
+      status.hidden = true; status.className = 'form-status';
+
+      try {
+        const fd = new FormData(form);
+        const payload = Object.fromEntries(fd.entries());
+        const res = await fetch('/api/form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'Unable to send right now. Please call us.');
+        status.textContent = data.message || 'Thank you! We will be in touch within 24 hours.';
+        status.classList.add('ok');
+        status.hidden = false;
+        form.reset();
+      } catch (err) {
+        status.textContent = err.message || 'Something went wrong. Please call 770-733-2621.';
+        status.classList.add('err');
+        status.hidden = false;
+      } finally {
+        submit.disabled = false; submit.textContent = 'Send request';
+      }
+    });
+  });
+</script>

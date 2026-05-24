@@ -1,8 +1,18 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
 const breadcrumbs = [
   { name: 'Home', href: '/' },
   { name: 'Training', href: '/dog-training' },
+];
+const trainingFields = [
+  { name: 'name', label: 'Your name', required: true, half: true },
+  { name: 'email', label: 'Email', type: 'email' as const, required: true, half: true },
+  { name: 'phone', label: 'Phone', type: 'tel' as const, half: true },
+  { name: 'dog_count', label: 'Number of dogs', half: true },
+  { name: 'dog_names', label: 'Dog name(s), breed(s) and age(s)' },
+  { name: 'help_with', label: 'What would you like help with?', type: 'textarea' as const, rows: 4, placeholder: 'Behavior issues, basic obedience, reactivity, etc.' },
+  { name: 'message', label: 'Anything else?', type: 'textarea' as const, rows: 3 },
 ];
 ---
 <BaseLayout
@@ -28,6 +38,15 @@ const breadcrumbs = [
       <p>At Evolutionary K9, it's all about understanding your dog's behavior. We will set you on the path of critical thinking and explain how a dog's evolution has affected his biology — and through that knowledge we can learn to modify, change or adjust unwanted behaviors while at the same time earning trust and confidence and reinforcing wanted behavior.</p>
 
       <p>We believe one training method isn't for all dogs, so we focus on a combination of classical and operant conditioning as the foundation of training — but primary importance is the understanding of how a dog thinks and makes decisions. Our training classes are for all members of the family over the age of 14. We do offer a separate class for younger students focusing on the relationship between kids and dogs, emphasizing appropriateness as well as understanding how dogs view the young.</p>
+
+      <h2>Training Request Form</h2>
+      <ContactForm
+        formId="training-request"
+        formLabel="Training Request"
+        introText="Training is currently paused — but feel free to submit. We'll reach out when we reopen consultations."
+        fields={trainingFields}
+        submitLabel="Send request"
+      />
     </div>
   </section>
 </BaseLayout>
