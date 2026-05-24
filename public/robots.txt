@@ -1,0 +1,34 @@
+# STAGING — search engines blocked, social-link-preview scrapers allowed.
+#
+# At production cutover, this file is swapped for the AI-bot allowlist
+# (GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, PerplexityBot,
+#  Google-Extended, Applebot-Extended, CCBot, cohere-ai) + Googlebot etc.
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: *
+Disallow: /
+
+Sitemap: https://www.evolutionaryk9.com/sitemap-index.xml

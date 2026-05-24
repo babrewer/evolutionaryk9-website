@@ -1,0 +1,4 @@
+# STAGING — search-engine blocking is handled by robots.txt only.
+# No X-Robots-Tag: noindex so Apple LinkPresentation / iMessage / FB Sharing
+# Debugger can render link previews. Production cutover may add explicit
+# Cache-Control here.

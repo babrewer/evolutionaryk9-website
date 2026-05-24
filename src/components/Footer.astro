@@ -1,0 +1,41 @@
+---
+import siteData from '../data/site.json';
+const { site } = siteData;
+interface Props { year: number }
+const { year } = Astro.props;
+const phoneTel = site.phone.replace(/[^0-9+]/g, '');
+---
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src={site.logoWideRev} alt={site.name} />
+      <p>{site.facilityNote}</p>
+    </div>
+
+    <div class="footer-block">
+      <h4>Find Us</h4>
+      <p>{site.address.streetAddress}</p>
+      <p>{site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}</p>
+      <a href={`tel:${phoneTel}`}>{site.phone}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+
+    <div class="footer-block">
+      <h4>Follow</h4>
+      <p>Share Evolutionary K9 on Social Media</p>
+      <div class="social">
+        <a href={site.facebookUrl} aria-label="Facebook" target="_blank" rel="noopener">
+          <img src="/images/facebook-icon-rev.svg" alt="Facebook" />
+        </a>
+        <a href={site.instagramUrl} aria-label="Instagram" target="_blank" rel="noopener">
+          <img src="/images/instagram-icon.svg" alt="Instagram" />
+        </a>
+        <a href={site.twitterUrl} aria-label="Twitter / X" target="_blank" rel="noopener">
+          <img src="/images/twitter-icon-rev.svg" alt="Twitter" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="copyline">© {site.name} {year} | Site by: <a href="https://www.brewermarketinggroup.com/" target="_blank" rel="noopener">BMG</a></div>

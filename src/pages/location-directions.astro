@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import siteData from '../data/site.json';
+const { site } = siteData;
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Location', href: '/location-directions' },
+];
+const phoneTel = site.phone.replace(/[^0-9+]/g, '');
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.address.streetAddress + ', ' + site.address.addressLocality + ', ' + site.address.addressRegion + ' ' + site.address.postalCode)}&output=embed`;
+---
+<BaseLayout
+  title="Location &amp; Directions | Evolutionary K9 — Mineral Bluff, GA"
+  description={`${site.address.streetAddress}, ${site.address.addressLocality}, ${site.address.addressRegion} ${site.address.postalCode}. ${site.directions}`}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-banner">
+    <h1>Location &amp; Directions</h1>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow prose">
+      <h2 style="margin-top:0;">Visit Us</h2>
+      <p style="font-family: 'Special Elite', monospace; font-size: 18px;">
+        {site.address.streetAddress}<br />
+        {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
+      </p>
+      <p>
+        <a href={`tel:${phoneTel}`} style="border-bottom: 2px solid var(--accent); padding-bottom: 2px;">{site.phone}</a><br />
+        <a href={`mailto:${site.email}`} style="border-bottom: 2px solid var(--accent); padding-bottom: 2px;">{site.email}</a>
+      </p>
+
+      <h2>Directions</h2>
+      <p>{site.directions}</p>
+
+      <div class="loc-map-wrap">
+        <iframe
+          src={mapEmbed}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title={`Map of ${site.name}`}></iframe>
+      </div>
+      <p>
+        <a class="btn" href={site.directionsUrl} target="_blank" rel="noopener">Get Directions →</a>
+      </p>
+
+      <div class="note-callout">{site.facilityNote}</div>
+    </div>
+  </section>
+</BaseLayout>

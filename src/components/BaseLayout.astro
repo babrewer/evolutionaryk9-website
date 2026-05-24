@@ -1,0 +1,148 @@
+---
+import '../styles/global.css';
+import siteData from '../data/site.json';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  breadcrumbs?: { name: string; href: string }[];
+  bodyClass?: string;
+}
+
+const { title, description = siteData.site.description, ogImage, breadcrumbs, bodyClass = '' } = Astro.props;
+const { site } = siteData;
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, site.url).toString();
+const ogImageUrl = ogImage
+  ? new URL(ogImage, site.url).toString()
+  : new URL(site.ogImage, site.url).toString();
+const year = new Date().getFullYear();
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.url}#organization`,
+  name: site.name,
+  alternateName: 'EK9',
+  url: site.url,
+  logo: new URL(site.logoWideRev, site.url).toString(),
+  image: new URL(site.ogImage, site.url).toString(),
+  description: site.description,
+  telephone: site.phone,
+  email: site.email,
+  address: { '@type': 'PostalAddress', ...site.address },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  areaServed: site.areasServed.map((a) => ({ '@type': 'Place', name: a })),
+  sameAs: [site.instagramUrl, site.facebookUrl, site.twitterUrl].filter(Boolean),
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}#website`,
+  url: site.url,
+  name: site.name,
+  publisher: { '@id': `${site.url}#organization` },
+  inLanguage: 'en-US',
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  url: canonical,
+  name: title,
+  description: description,
+  isPartOf: { '@id': `${site.url}#website` },
+  about: { '@id': `${site.url}#organization` },
+  primaryImageOfPage: ogImageUrl,
+};
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((b, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: b.name,
+    item: new URL(b.href, site.url).toString(),
+  })),
+} : null;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* STAGING — search-engine blocking handled via robots.txt (Disallow: /). No meta-robots so iMessage / Apple LinkPresentation / FB Sharing Debugger can render previews. */}
+
+    <meta property="og:type" content={pathname === '/' ? 'website' : 'article'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content={site.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <meta name="theme-color" content="#0e0e0e" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Open+Sans:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="icon" type="image/png" sizes="32x32" href={site.favicon} />
+    <link rel="apple-touch-icon" href={site.appleTouchIcon} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site index" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+    {breadcrumbSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    )}
+
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer year={year} />
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </a>
+    <script>
+      const btt = document.getElementById('back-to-top');
+      if (btt) {
+        const onScroll = () => {
+          if (window.scrollY > 420) btt.classList.add('visible');
+          else btt.classList.remove('visible');
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+    </script>
+  </body>
+</html>

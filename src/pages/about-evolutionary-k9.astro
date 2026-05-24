@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about-evolutionary-k9' },
+];
+---
+<BaseLayout
+  title="About | Evolutionary K9"
+  description="Dedicated animal lovers focused on creating healthy, fulfilling relationships between canines and their human packs. Owner-operated, licensed, onsite 24/7."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-banner">
+    <h1>About Evolutionary K9</h1>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow prose">
+      <h2 style="margin-top: 0;">Dogs aren't just pets — dogs are family.</h2>
+      <p>We are dedicated animal lovers with a focused passion for creating and nurturing a healthy and fulfilling relationship with canines and their human packs. With a focused training method we help human family members better understand their dog and create a mutual language both you and your canine can understand.</p>
+      <p>Canines are considered one of the most evolved mammals on the planet. With humans speaking over 6,000 languages a dog's potential is nearly limitless. Their evolution has created a whole new scientific approach to training and behavioral understanding.</p>
+      <p>The water truly does run deep. It is our goal to help you recognize, understand, translate, and act appropriately on the communication signals your companion is sending you all day long.</p>
+      <div class="note-callout">We offer loving care in a licensed facility. We own and operate our facility and are onsite 24/7.</div>
+    </div>
+  </section>
+</BaseLayout>

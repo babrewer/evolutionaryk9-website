@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Training', href: '/dog-training' },
+];
+---
+<BaseLayout
+  title="Dog Training | Evolutionary K9 — Mineral Bluff, GA"
+  description="Behavior training that combines classical and operant conditioning with a focus on understanding how a dog thinks and makes decisions. Training currently on pause — check back for updates."
+  ogImage="/images/training.jpg"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-banner">
+    <h1>Dog Training</h1>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow prose">
+      <div class="status-pause">
+        <h3>Training is currently on "Paws"</h3>
+        <p>We are not accepting any new training / consultation requests at this time. Check back here for future updates.</p>
+      </div>
+
+      <p>At Evolutionary K9, it's all about understanding your dog's behavior. We will set you on the path of critical thinking and explain how a dog's evolution has affected his biology — and through that knowledge we can learn to modify, change or adjust unwanted behaviors while at the same time earning trust and confidence and reinforcing wanted behavior.</p>
+
+      <p>We believe one training method isn't for all dogs, so we focus on a combination of classical and operant conditioning as the foundation of training — but primary importance is the understanding of how a dog thinks and makes decisions. Our training classes are for all members of the family over the age of 14. We do offer a separate class for younger students focusing on the relationship between kids and dogs, emphasizing appropriateness as well as understanding how dogs view the young.</p>
+    </div>
+  </section>
+</BaseLayout>

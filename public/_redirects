@@ -1,0 +1,6 @@
+# Old/misspelled paths → canonical pages
+/about  /about-evolutionary-k9  301
+/boarding  /dog-boarding  301
+/daycare  /dog-day-care  301
+/training  /dog-training  301
+/location  /location-directions  301

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Boarding', href: '/dog-boarding' },
+];
+---
+<BaseLayout
+  title="Dog Boarding | Evolutionary K9 — Mineral Bluff, GA"
+  description="Overnight and extended-stay dog boarding in a temperature-controlled, licensed facility. Supervised exercise, owner onsite 24/7. Current Rabies, Distemper and Bordetella vaccinations required."
+  ogImage="/images/boarding.jpg"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-banner">
+    <h1>Dog Boarding</h1>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow prose">
+      <p>We offer overnight and extended stay boarding for your dog in a safe, secure, well-lit facility with extra measures taken to ensure your dog has a stress-free stay from home.</p>
+
+      <p>All of our dogs are kept in a temperature-controlled environment (air conditioned and heated) for maximum comfort. We do require all dogs be current on their vaccinations and require proof of this before boarding with us because your dog's well-being is primary to us. Current <strong>Rabies, Distemper and Bordetella</strong> vaccinations are required for your dog to stay with us.</p>
+
+      <p>While you're away, your dog will spend time in our ample exercise yards while supervised at all times.</p>
+
+      <p>We try to accommodate most special requests, so be sure to let us know if your dog has a special requirement or need during his/her stay.</p>
+
+      <div class="note-callout">Please note: if it's your dog's first stay with us, a one-time First Day / Acclimation Fee of <strong>$15</strong> will be added for processing paperwork and a one-on-one assessment with our team.</div>
+
+      <h2>Boarding Rates</h2>
+      <ul class="rate-list">
+        <li><span>1 dog</span><strong>$40 per night</strong></li>
+        <li><span>2 dogs</span><strong>$75 per night</strong></li>
+        <li><span>3 dogs</span><strong>$95 per night</strong></li>
+      </ul>
+
+      <h2>Drop-off &amp; Pick-up</h2>
+      <ul class="rate-list">
+        <li><span>AM</span><strong>8:00 am – 10:00 am</strong></li>
+        <li><span>PM</span><strong>4:00 pm – 6:00 pm</strong></li>
+      </ul>
+
+      <h2>Dog Spa Services</h2>
+      <p>We are happy to offer Bubble Bath / Blow Dry and Nail Trim services for our Boarding and Daycare dogs for an additional fee:</p>
+      <ul class="rate-list">
+        <li><span>Small Dog</span><strong>$30+</strong></li>
+        <li><span>Medium Dog</span><strong>$45+</strong></li>
+        <li><span>Large Dog</span><strong>$65+</strong></li>
+        <li><span>XLarge and/or Long Coat</span><strong>$90+</strong></li>
+        <li><span>Nail Trim (per dog)</span><strong>$15</strong></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

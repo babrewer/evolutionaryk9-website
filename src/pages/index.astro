@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import siteData from '../data/site.json';
+const { site, services } = siteData;
+---
+<BaseLayout
+  title="Evolutionary K9 | Dog Boarding, Daycare & Training — Mineral Bluff, GA"
+  description={site.description}
+>
+  <section class="hero" id="top">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/images/hero-poster.jpg">
+      <source src="/images/hero-video.webm" type="video/webm" />
+      <source src="/images/hero-video.mp4" type="video/mp4" />
+    </video>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="hero-lockup">
+      <img src={site.logoWideRev} alt={site.name} />
+      <div class="hero-tagline">{site.tagline}</div>
+    </div>
+    <a href="#intro" class="scroll-indicator" aria-label="Scroll to content">Scroll</a>
+  </section>
+
+  <section class="section" id="intro">
+    <div class="container intro-headline">
+      <h1>Evolutionary K9</h1>
+      <h2>Dog Boarding and Daycare</h2>
+      <p>Proudly serving Blue Ridge, Ellijay, Blairsville, Murphy, NC and surrounding areas in the North Georgia mountains.</p>
+      <p>We offer professional loving care in a licensed facility that we own and operate and are onsite 24/7.</p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <h2 style="text-align:center; margin-bottom: 6px;">Services</h2>
+      <div class="services-meta"><em>click on any item below for more</em></div>
+      <div class="services-grid">
+        {services.map((s) => (
+          <a class="service-card" href={s.href} id={s.id} aria-label={`${s.name} — ${s.blurb}`}>
+            <img src={s.image} alt={s.name} loading="lazy" />
+            <div class="label">
+              <h3>{s.name}</h3>
+              <div class="blurb">{s.blurb}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-teaser">
+    <div class="container-narrow" style="text-align:center;">
+      <h2>About Evolutionary K9</h2>
+      <div class="sub">{site.tagline}</div>
+      <p>We are dedicated animal lovers with a focused passion for creating and nurturing a healthy and fulfilling relationship with canines and their human packs. With a focused training method we help human family members better understand their dog and create a mutual language both you and your canine can understand.</p>
+      <a href="/about-evolutionary-k9" class="more">More →</a>
+    </div>
+  </section>
+
+  <section class="news-teaser">
+    <div class="container">
+      <h2>Featured News</h2>
+      <div class="sub">The latest news, views and info from Evolutionary K9</div>
+      <div class="news-grid">
+        <a href="/news" class="news-card">
+          <h3>Prices &amp; Fees</h3>
+          <div class="meta">Current Rates &amp; Fees</div>
+        </a>
+      </div>
+      <div class="more-row">
+        <a href="/news" class="btn-outline">More News</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="insta" id="instagrams">
+    <div class="container">
+      <h2 style="text-align:center;">Instagram Feed</h2>
+      <div class="insta-embed" id="insta-embed">
+        <div class="insta-placeholder">
+          Instagram feed widget renders here — drop in the Behold or other embed code in <code>insta-embed</code>.
+        </div>
+      </div>
+      <div class="insta-handle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <a href={site.instagramUrl} target="_blank" rel="noopener">@{site.instagramHandle}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

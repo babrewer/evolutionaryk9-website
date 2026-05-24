@@ -1,0 +1,48 @@
+{
+  "site": {
+    "name": "Evolutionary K9",
+    "slug": "evolutionaryk9",
+    "url": "https://www.evolutionaryk9.com",
+    "domain": "evolutionaryk9.com",
+    "vertical": "pet_services",
+    "description": "Dog boarding, daycare and training in Mineral Bluff, GA — proudly serving Blue Ridge, Ellijay, Blairsville, Murphy NC and surrounding North Georgia mountains. Professional loving care in a licensed, owner-operated facility, onsite 24/7.",
+    "tagline": "Dogs aren't just pets — dogs are family.",
+    "logoRev": "/images/ek9-logo-rev.svg",
+    "logoWideRev": "/images/ek9-logo-wide-rev.svg",
+    "favicon": "/images/favicon-32.png",
+    "appleTouchIcon": "/images/apple-touch-icon.png",
+    "ogImage": "/images/og-default.jpg",
+    "phone": "770-733-2621",
+    "email": "info@evolutionaryk9.com",
+    "address": {
+      "streetAddress": "8586 Appalachian Hwy",
+      "addressLocality": "Mineral Bluff",
+      "addressRegion": "GA",
+      "postalCode": "30559",
+      "addressCountry": "US"
+    },
+    "geo": { "lat": 34.910, "lng": -84.273 },
+    "directionsUrl": "https://www.google.com/maps/dir//8586+Appalachian+Hwy,+Mineral+Bluff,+GA+30559",
+    "directions": "We are on Hwy 515 — 0.3 miles past Dunkin Donuts on the same side of the road between Hwy 60 and Forge Mill Rd. in a brown cabin. Look for the orange mailbox at the road with \"EK9\" on it.",
+    "facilityNote": "We offer loving care in a licensed facility. We own and operate our facility and are onsite 24/7.",
+    "instagramUrl": "https://www.instagram.com/evolutionaryk9/",
+    "facebookUrl": "https://www.facebook.com/evolutionaryk9/",
+    "twitterUrl": "https://twitter.com/evolutionaryk9",
+    "instagramHandle": "evolutionaryk9",
+    "areasServed": ["Blue Ridge", "Ellijay", "Blairsville", "Murphy, NC", "North Georgia mountains"]
+  },
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about-evolutionary-k9" },
+    { "label": "Boarding", "href": "/dog-boarding" },
+    { "label": "Daycare", "href": "/dog-day-care" },
+    { "label": "Training", "href": "/dog-training" },
+    { "label": "News", "href": "/news" },
+    { "label": "Location", "href": "/location-directions" }
+  ],
+  "services": [
+    { "id": "boarding", "name": "Dog Boarding", "blurb": "Overnight and extended stay boarding", "image": "/images/boarding.jpg", "href": "/dog-boarding" },
+    { "id": "daycare", "name": "Dog Daycare", "blurb": "Daily between 8am and 6pm", "image": "/images/daycare.jpg", "href": "/dog-day-care" },
+    { "id": "training", "name": "Dog Training", "blurb": "Behavior training for the dog and owner(s)", "image": "/images/training.jpg", "href": "/dog-training" }
+  ]
+}

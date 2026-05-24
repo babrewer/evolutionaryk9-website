@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'News', href: '/news' },
+];
+---
+<BaseLayout
+  title="News | Evolutionary K9"
+  description="News, views and info from Evolutionary K9 — Mineral Bluff, GA dog boarding, daycare and training."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-banner">
+    <h1>News</h1>
+  </section>
+
+  <section class="section">
+    <div class="container-narrow prose">
+      <div class="news-grid">
+        <a href="/dog-boarding" class="news-card">
+          <h3>Prices &amp; Fees</h3>
+          <div class="meta">Current Rates &amp; Fees</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
