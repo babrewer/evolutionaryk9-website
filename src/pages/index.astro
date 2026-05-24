@@ -76,9 +76,7 @@ const { site, services } = siteData;
     <div class="container">
       <h2 style="text-align:center;">Instagram Feed</h2>
       <div class="insta-embed" id="insta-embed">
-        <div class="insta-placeholder">
-          Instagram feed widget renders here — drop in the Behold or other embed code in <code>insta-embed</code>.
-        </div>
+        <behold-widget feed-id="nO3uXNFdhMW2HqmKkGg1"></behold-widget>
       </div>
       <div class="insta-handle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -86,4 +84,13 @@ const { site, services } = siteData;
       </div>
     </div>
   </section>
+
+  <script>
+    (() => {
+      const d = document, s = d.createElement('script');
+      s.type = 'module';
+      s.src = 'https://w.behold.so/widget.js';
+      d.head.append(s);
+    })();
+  </script>
 </BaseLayout>
