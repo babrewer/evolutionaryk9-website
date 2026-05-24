@@ -4,3 +4,7 @@
 /daycare  /dog-day-care  301
 /training  /dog-training  301
 /location  /location-directions  301
+
+# News page retired — pricing is now inline on home + dedicated pages
+/news  /#rates  301
+/news/*  /#rates  301

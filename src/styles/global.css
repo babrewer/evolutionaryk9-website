@@ -296,16 +296,48 @@ body.nav-open{ overflow: hidden; }
 .about-teaser .more{ display:inline-block; margin-top: 18px; font-family:"Special Elite", monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
 .about-teaser .more:hover{ color: var(--ink); }
 
-/* ===== News teaser ===== */
-.news-teaser{ padding: 96px 0; }
-.news-teaser h2{ text-align: center; margin: 0 0 6px; }
-.news-teaser .sub{ text-align: center; font-family:"Special Elite", monospace; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 32px; }
-.news-grid{ display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 640px; margin: 0 auto; }
-.news-card{ display: block; background: var(--paper); border: 1px solid var(--rule); padding: 28px 26px; }
-.news-card:hover{ border-color: var(--ink); }
-.news-card h3{ margin: 0 0 4px; }
-.news-card .meta{ font-family:"Special Elite", monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-.news-teaser .more-row{ text-align: center; margin-top: 32px; }
+/* ===== Rates grid (home) ===== */
+.rates-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 28px;
+}
+.rate-block{
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 28px 26px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.rate-block h3{
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+.rate-block .rate-list{ margin: 0 0 16px; flex: 1; }
+.rate-block .rate-more{
+  display: inline-block;
+  margin-top: auto;
+  font-family: "Special Elite", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+  align-self: flex-start;
+}
+.rates-foot{
+  text-align: center;
+  margin-top: 36px;
+  font-family: "Special Elite", monospace;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.rates-foot p{ margin: 4px 0; }
+@media (max-width: 920px){
+  .rates-grid{ grid-template-columns: 1fr; }
+}
 
 /* ===== Instagram embed (placeholder for Behold) ===== */
 .insta{ padding: 96px 0; background: var(--hush); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }

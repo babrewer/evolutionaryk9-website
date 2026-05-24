@@ -39,6 +39,8 @@ export const GET: APIRoute = () => {
   for (const n of nav) {
     lines.push(`- [${n.label}](${base}${n.href})`);
   }
+  lines.push('');
+  lines.push('Note: there is no separate news page — current rates and fees are displayed on the home page and on each service page.');
   return new Response(lines.join('\n') + '\n', {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',

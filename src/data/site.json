@@ -37,7 +37,6 @@
     { "label": "Boarding", "href": "/dog-boarding" },
     { "label": "Daycare", "href": "/dog-day-care" },
     { "label": "Training", "href": "/dog-training" },
-    { "label": "News", "href": "/news" },
     { "label": "Location", "href": "/location-directions" }
   ],
   "services": [
